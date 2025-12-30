@@ -12,17 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import flake8.main.cli
 import pytest
+from ament_flake8.main import main_with_errors
 
 
 @pytest.mark.flake8
 @pytest.mark.linter
 def test_flake8():
-    rc = flake8.main.cli.main(
+    rc, errors = main_with_errors(
         argv=[
-            '.',
             '--exclude=build,install,log',
         ]
     )
-    assert rc == 0, 'Found code style errors / warnings'
+    assert rc == 0, \
+        'Found {} code style errors / warnings:\n{}'.format(
+            len(errors),
+            '\n'.join(errors),
+        )
