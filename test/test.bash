@@ -1,13 +1,16 @@
 #!/bin/bash
-#SPDX...
+# SPDXここ書く
 
-dir=~
-[ "$1" != "" ] && dir="$1"
+set -e
+
+dir=${1:-$HOME}
+
+source /opt/ros/jazzy/setup.bash
 
 cd $dir/ros2_ws
-colcon build
-source $dir/.bashrc
-timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log
+colcon build --packages-select mypkg
+source install/setup.bash
 
-cat /tmp/mypkg.log |
-grep 'Listen: 10'
+timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log || true
+
+grep 'Listen: 10' /tmp/mypkg.log
