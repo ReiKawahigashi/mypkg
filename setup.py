@@ -1,33 +1,30 @@
-from setuptools import find_packages, setup, os
-from glob import glob
+from setuptools import setup
 
 package_name = 'mypkg'
 
 setup(
     name=package_name,
     version='0.0.0',
-    packages=find_packages(exclude=['test']),
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name), glob('launch/*.launch.py'))
+        ('share/' + package_name + '/launch',
+            ['launch/distance_lid.launch.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='rei',
-    maintainer_email='s24C1042LK@s.chibakoudai.jp',
-    description='ロボットシステム学',
-    license='BSD-3-Clause',
-    extras_require={
-        'test': [
-            'pytest',
-        ],
-    },
+    maintainer_email='rei@example.com',
+    description='Distance sensor and LID light control package (lesson10 style)',
+    license='Apache License 2.0',
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'talker = mypkg.talker:main',
-            'listener = mypkg.listener:main',
+            'distance_node = mypkg.distance_node:main',
+            'lid_light_node = mypkg.lid_light_node:main',
         ],
     },
 )
+
