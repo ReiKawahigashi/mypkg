@@ -25,6 +25,9 @@ jobs:
           rosdep update
           rosdep install --from-paths . --ignore-src -r -y
 
+      - name: Clean build artifacts
+        run: rm -rf build/ install/ log/
+
       - name: Build
         run: |
           source /opt/ros/jazzy/setup.bash

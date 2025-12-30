@@ -17,12 +17,12 @@ setup(
     zip_safe=True,
     maintainer='rei',
     maintainer_email='rei@example.com',
-    description='Distance sensor and LID light control package (lesson10 style)',
+    description='Distance sensor and LID light control package',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'distance_node = mypkg.distance_node:main',
+            'distance_sensor_node = mypkg.distance_sensor_node:main',
             'lid_light_node = mypkg.lid_light_node:main',
         ],
     },
