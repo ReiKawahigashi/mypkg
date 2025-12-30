@@ -1,42 +1,22 @@
-name: ROS2 Test
+name: ROS2 CI
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup ROS 2 Humble
+      - name: Setup ROS 2
         uses: ros-tooling/setup-ros@v0.7
         with:
-          required-ros-distributions: Jazzy
+          required-ros-distributions: jazzy
 
-      - name: Install dependencies
+      - name: Build and test
         run: |
-          sudo apt update
-          sudo apt install -y python3-colcon-common-extensions python3-pytest
-
-      - name: Build workspace
-        run: |
-          source /opt/ros/humble/setup.bash
+          source /opt/ros/jazzy/setup.bash
           colcon build
-        shell: bash
-
-      - name: Run tests
-        run: |
-          source /opt/ros/humble/setup.bash
-          source install/setup.bash
-          colcon test --event-handlers console_direct+
-        shell: bash
-
-      - name: Test result
-        run: |
+          colcon test
           colcon test-result --verbose
-        shell: bash
-
