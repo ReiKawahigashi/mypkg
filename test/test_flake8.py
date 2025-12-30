@@ -20,7 +20,8 @@ import pytest
 @pytest.mark.linter
 def test_flake8():
     rc, errors = main_with_errors(argv=[
-        '--extend-exclude=build,install,log'
+        '--extend-exclude',
+        'build,install,log'
     ])
     assert rc == 0, \
         'Found %d code style errors / warnings:\n' % len(errors) + \
