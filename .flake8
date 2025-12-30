@@ -3,4 +3,3 @@ exclude =
     build,
     install,
     log
-max-line-length = 99
