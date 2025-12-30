@@ -1,22 +1,42 @@
-name: ROS2 CI
+name: ROS 2 Jazzy CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup ROS 2
+      - name: Set up ROS 2 Jazzy
         uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: jazzy
 
-      - name: Build and test
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          rosdep update
+          rosdep install --from-paths . --ignore-src -r -y
+
+      - name: Build
         run: |
           source /opt/ros/jazzy/setup.bash
-          colcon build
-          colcon test
+          colcon build --event-handlers console_direct+
+
+      - name: Test
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          source install/setup.bash
+          colcon test --event-handlers console_direct+
+
+      - name: Test result
+        if: always()
+        run: |
           colcon test-result --verbose
