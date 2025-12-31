@@ -8,15 +8,16 @@ source install/setup.bash
 LOG=/tmp/hiragana_test.log
 rm -f "$LOG"
 
-# ノード起動（バックグラウンド）
+# ---- ノード起動（1ノード）----
 ros2 run mypkg hiragana_node > "$LOG" 2>&1 &
 PID=$!
 
-# 少し待つ
+# CI は遅いので少し待つ
 sleep 3
 
-# 出力確認
+# ---- 出力確認 ----
+# Hiragana: ○○○ が出ていればOK
 grep "Hiragana:" "$LOG"
 
-# 後始末
+# ---- 後始末 ----
 kill $PID
