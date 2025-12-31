@@ -5,13 +5,13 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='mypkg',
-            executable='distance_sensor_node',
+            package='alphabet_pkg',
+            executable='random_number_node',
             output='screen'
         ),
         Node(
-            package='mypkg',
-            executable='lid_light_node',
+            package='alphabet_pkg',
+            executable='alphabet_node',
             output='screen'
-        )
+        ),
     ])
