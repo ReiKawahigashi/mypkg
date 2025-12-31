@@ -1,21 +1,61 @@
 #!/bin/bash
-# SPDX-License-Identifier: Apache-2.0
 
-set -e
-
-dir=${1:-"$HOME"}
-
-# ROS2 setup
-source /opt/ros/jazzy/setup.bash
-
-cd "$dir/ros2_ws"
-
-colcon build --packages-select mypkg
-
+source /opt/ros/humble/setup.bash
 source install/setup.bash
 
-# run launch, ignore failure
-timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log || true
+# NG時用関数（講義資料そのまま）
+ng () {
+    echo "NG at line ${1}"
+    res=1
+}
 
-# check output
-grep 'Listen: 10' /tmp/mypkg.log
+res=0
+
+# lid_light_node をバックグラウンドで起動
+ros2 run mypkg lid_light_node > /tmp/lid_test.log 2>&1 &
+LID_PID=$!
+
+# 起動待ち
+sleep 1
+
+# -------- テストケース --------
+# 30未満 → ON
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 5.0}" -1
+sleep 0.3
+grep -q "LID LIGHT: ON" /tmp/lid_test.log || ng $LINENO
+
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 15.0}" -1
+sleep 0.3
+grep -q "LID LIGHT: ON" /tmp/lid_test.log || ng $LINENO
+
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 29.9}" -1
+sleep 0.3
+grep -q "LID LIGHT: ON" /tmp/lid_test.log || ng $LINENO
+
+# 30以上 → OFF
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 30.0}" -1
+sleep 0.3
+grep -q "LID LIGHT: OFF" /tmp/lid_test.log || ng $LINENO
+
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 45.0}" -1
+sleep 0.3
+grep -q "LID LIGHT: OFF" /tmp/lid_test.log || ng $LINENO
+
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 60.0}" -1
+sleep 0.3
+grep -q "LID LIGHT: OFF" /tmp/lid_test.log || ng $LINENO
+
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 99.9}" -1
+sleep 0.3
+grep -q "LID LIGHT: OFF" /tmp/lid_test.log || ng $LINENO
+
+# 境界チェック（もう一回ON）
+ros2 topic pub /distance std_msgs/msg/Float32 "{data: 0.0}" -1
+sleep 0.3
+grep -q "LID LIGHT: ON" /tmp/lid_test.log || ng $LINENO
+
+# 後始末
+kill $LID_PID
+wait $LID_PID 2>/dev/null
+
+exit $res

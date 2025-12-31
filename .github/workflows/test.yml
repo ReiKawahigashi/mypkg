@@ -1,42 +1,28 @@
-name: ROS2 CI
+name: test
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-24.04
+  test:
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Setup ROS 2
         uses: ros-tooling/setup-ros@v0.7
         with:
-          required-ros-distributions: jazzy
-
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          rosdep update
-          rosdep install --from-paths . --ignore-src -r -y
+          required-ros-distributions: humble
 
       - name: Build
         run: |
-          source /opt/ros/jazzy/setup.bash
-          colcon build --event-handlers console_direct+
+          source /opt/ros/humble/setup.bash
+          colcon build
 
       - name: Test
         run: |
-          source /opt/ros/jazzy/setup.bash
+          source /opt/ros/humble/setup.bash
           source install/setup.bash
-          colcon test --event-handlers console_direct+
-
-      - name: Test result
-        if: always()
-        run: |
-          colcon test-result --verbose
+          bash test.bash
