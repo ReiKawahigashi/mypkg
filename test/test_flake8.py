@@ -16,15 +16,17 @@ from ament_flake8.main import main_with_errors
 import pytest
 
 
+# flake8 test
 @pytest.mark.flake8
 @pytest.mark.linter
 def test_flake8():
     rc, errors = main_with_errors(argv=[
+        '--exclude=build,install,log',
         'mypkg',
         'launch',
-        'test'
+        'test',
     ])
     assert rc == 0, (
-        'Found %d code style errors / warnings:\n' % len(errors)
-        + '\n'.join(errors)
+        'Found %d code style errors / warnings:\n' % len(errors) +
+        '\n'.join(errors)
     )
