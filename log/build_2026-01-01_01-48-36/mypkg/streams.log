@@ -1,0 +1,38 @@
+[1.753s] Invoking command in '/home/rei/ros2_ws/src/mypkg': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/rei/ros2_ws/src/mypkg/build/mypkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/mypkg build --build-base /home/rei/ros2_ws/src/mypkg/build/mypkg/build install --record /home/rei/ros2_ws/src/mypkg/build/mypkg/install.log --single-version-externally-managed install_data
+[2.069s] running egg_info
+[2.070s] creating build/mypkg/mypkg.egg-info
+[2.089s] writing build/mypkg/mypkg.egg-info/PKG-INFO
+[2.089s] writing dependency_links to build/mypkg/mypkg.egg-info/dependency_links.txt
+[2.089s] writing entry points to build/mypkg/mypkg.egg-info/entry_points.txt
+[2.090s] writing requirements to build/mypkg/mypkg.egg-info/requires.txt
+[2.090s] writing top-level names to build/mypkg/mypkg.egg-info/top_level.txt
+[2.090s] writing manifest file 'build/mypkg/mypkg.egg-info/SOURCES.txt'
+[2.135s] reading manifest file 'build/mypkg/mypkg.egg-info/SOURCES.txt'
+[2.135s] adding license file 'LICENSE'
+[2.135s] writing manifest file 'build/mypkg/mypkg.egg-info/SOURCES.txt'
+[2.136s] running build
+[2.136s] running build_py
+[2.136s] creating /home/rei/ros2_ws/src/mypkg/build/mypkg/build
+[2.137s] creating /home/rei/ros2_ws/src/mypkg/build/mypkg/build/lib
+[2.138s] creating /home/rei/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[2.138s] copying mypkg/hiragana_node.py -> /home/rei/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[2.138s] copying mypkg/__init__.py -> /home/rei/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[2.138s] running install
+[2.146s] running install_lib
+[2.165s] creating /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages/mypkg
+[2.165s] copying /home/rei/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg/hiragana_node.py -> /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages/mypkg
+[2.166s] copying /home/rei/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg/__init__.py -> /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages/mypkg
+[2.166s] byte-compiling /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages/mypkg/hiragana_node.py to hiragana_node.cpython-312.pyc
+[2.168s] byte-compiling /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages/mypkg/__init__.py to __init__.cpython-312.pyc
+[2.168s] running install_data
+[2.168s] creating /home/rei/ros2_ws/src/mypkg/install/mypkg/share/ament_index
+[2.168s] creating /home/rei/ros2_ws/src/mypkg/install/mypkg/share/ament_index/resource_index
+[2.170s] creating /home/rei/ros2_ws/src/mypkg/install/mypkg/share/ament_index/resource_index/packages
+[2.170s] copying resource/mypkg -> /home/rei/ros2_ws/src/mypkg/install/mypkg/share/ament_index/resource_index/packages
+[2.170s] copying package.xml -> /home/rei/ros2_ws/src/mypkg/install/mypkg/share/mypkg
+[2.171s] running install_egg_info
+[2.192s] Copying build/mypkg/mypkg.egg-info to /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages/mypkg-0.0.0-py3.12.egg-info
+[2.194s] running install_scripts
+[2.377s] Installing hiragana_node script to /home/rei/ros2_ws/src/mypkg/install/mypkg/lib/mypkg
+[2.378s] writing list of installed files to '/home/rei/ros2_ws/src/mypkg/build/mypkg/install.log'
+[2.409s] Invoked command in '/home/rei/ros2_ws/src/mypkg' returned '0': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/rei/ros2_ws/src/mypkg/build/mypkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rei/ros2_ws/src/mypkg/install/mypkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/mypkg build --build-base /home/rei/ros2_ws/src/mypkg/build/mypkg/build install --record /home/rei/ros2_ws/src/mypkg/build/mypkg/install.log --single-version-externally-managed install_data

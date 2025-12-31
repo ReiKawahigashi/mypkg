@@ -1,0 +1,2 @@
+[console_scripts]
+hiragana_node = mypkg.hiragana_node:main

@@ -5,17 +5,18 @@ set -e
 source /opt/ros/humble/setup.bash
 source install/setup.bash
 
-LOG=/tmp/alphabet_test.log
+LOG=/tmp/hiragana_test.log
 rm -f "$LOG"
 
-# launch（1回だけ）
+# ノード起動（バックグラウンド）
+ros2 run mypkg hiragana_node > "$LOG" 2>&1 &
 PID=$!
 
 # 少し待つ
-sleep 5
+sleep 3
 
-# Alphabet が出ているか確認
-grep "Alphabet:" "$LOG"
+# 出力確認
+grep "Hiragana:" "$LOG"
 
 # 後始末
 kill $PID
