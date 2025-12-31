@@ -1,42 +1,60 @@
 #!/bin/bash
+set -e
 
+# ROS2 環境読み込み
 source /opt/ros/humble/setup.bash
 source install/setup.bash
 
+res=0
 ng () {
     echo "NG at line $1"
     res=1
 }
 
-res=0
+# テスト用ログ
+LOG=/tmp/alphabet_test.log
+rm -f $LOG
 
-# alphabet_node 起動
-ros2 run alphabet_pkg alphabet_node > /tmp/alphabet_test.log 2>&1 &
+# alphabet_node をバックグラウンド起動
+ros2 run mypkg alphabet_node > $LOG 2>&1 &
 PID=$!
-sleep 1
 
-# ---- テスト ----
-ros2 topic pub /number std_msgs/msg/Int32 "{data: 5}" -1
-sleep 0.3
-grep -q "Alphabet: A" /tmp/alphabet_test.log || ng $LINENO
+# CI では起動が遅いので待つ
+sleep 2
 
-ros2 topic pub /number std_msgs/msg/Int32 "{data: 25}" -1
-sleep 0.3
-grep -q "Alphabet: B" /tmp/alphabet_test.log || ng $LINENO
+# -------- テスト開始 --------
 
-ros2 topic pub /number std_msgs/msg/Int32 "{data: 45}" -1
-sleep 0.3
-grep -q "Alphabet: C" /tmp/alphabet_test.log || ng $LINENO
+# A
+ros2 topic pub /number std_msgs/msg/Int32 "{data: 5}" -1 \
+  --wait-for-subscription-timeout 5
+sleep 0.5
+grep -q "Alphabet: A" $LOG || ng $LINENO
 
-ros2 topic pub /number std_msgs/msg/Int32 "{data: 65}" -1
-sleep 0.3
-grep -q "Alphabet: D" /tmp/alphabet_test.log || ng $LINENO
+# B
+ros2 topic pub /number std_msgs/msg/Int32 "{data: 25}" -1 \
+  --wait-for-subscription-timeout 5
+sleep 0.5
+grep -q "Alphabet: B" $LOG || ng $LINENO
 
-ros2 topic pub /number std_msgs/msg/Int32 "{data: 85}" -1
-sleep 0.3
-grep -q "Alphabet: E" /tmp/alphabet_test.log || ng $LINENO
+# C
+ros2 topic pub /number std_msgs/msg/Int32 "{data: 45}" -1 \
+  --wait-for-subscription-timeout 5
+sleep 0.5
+grep -q "Alphabet: C" $LOG || ng $LINENO
 
-# 後始末
+# D
+ros2 topic pub /number std_msgs/msg/Int32 "{data: 65}" -1 \
+  --wait-for-subscription-timeout 5
+sleep 0.5
+grep -q "Alphabet: D" $LOG || ng $LINENO
+
+# E
+ros2 topic pub /number std_msgs/msg/Int32 "{data: 85}" -1 \
+  --wait-for-subscription-timeout 5
+sleep 0.5
+grep -q "Alphabet: E" $LOG || ng $LINENO
+
+# -------- 後片付け --------
 kill $PID
 wait $PID 2>/dev/null
 
