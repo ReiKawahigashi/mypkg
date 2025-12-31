@@ -11,16 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup ROS 2
-        uses: ros-tooling/setup-ros@v0.7
-        with:
-          required-ros-distributions: humble
-
-      - name: Clean workspace
-        run: |
-          rm -rf build install log
-
-
       - name: Build
         run: |
           source /opt/ros/humble/setup.bash
