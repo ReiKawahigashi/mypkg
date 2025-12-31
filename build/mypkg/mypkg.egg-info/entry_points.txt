@@ -1,3 +1,0 @@
-[console_scripts]
-alphabet_node = mypkg.alphabet_node:main
-random_number_node = mypkg.random_number_node:main
