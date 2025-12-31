@@ -1,4 +1,3 @@
-cat << 'EOF' > setup.py
 from setuptools import setup
 
 package_name = 'mypkg'
@@ -28,4 +27,3 @@ setup(
         ],
     },
 )
-EOF
