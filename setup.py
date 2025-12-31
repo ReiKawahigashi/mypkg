@@ -1,3 +1,4 @@
+cat << 'EOF' > setup.py
 from setuptools import setup
 
 package_name = 'mypkg'
@@ -27,4 +28,4 @@ setup(
         ],
     },
 )
-# この行でファイルを終わらせてください（空行を作らない）
+EOF
