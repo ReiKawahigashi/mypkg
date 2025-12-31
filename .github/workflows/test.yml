@@ -27,6 +27,7 @@ jobs:
 
       - name: Force Clean Build Artifacts
         run: |
+          # テスト前に古いゴミを強制的に消去する
           rm -rf build/
           rm -rf install/
           rm -rf log/
@@ -40,7 +41,8 @@ jobs:
         run: |
           source /opt/ros/jazzy/setup.bash
           source install/setup.bash
-          colcon test --event-handlers console_direct+
+          # buildとinstallフォルダをチェック対象から外してテスト実行
+          colcon test --event-handlers console_direct+ --pytest-args "--flake8 --ignore=build --ignore=install"
 
       - name: Test result
         if: always()
