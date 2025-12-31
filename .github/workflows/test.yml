@@ -1,4 +1,4 @@
-name: ROS 2 Jazzy CI
+name: ROS2 CI
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up ROS 2 Jazzy
+      - name: Setup ROS 2
         uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: jazzy
@@ -25,13 +25,6 @@ jobs:
           rosdep update
           rosdep install --from-paths . --ignore-src -r -y
 
-      - name: Force Clean Build Artifacts
-        run: |
-          # テスト前に古いゴミを強制的に消去する
-          rm -rf build/
-          rm -rf install/
-          rm -rf log/
-
       - name: Build
         run: |
           source /opt/ros/jazzy/setup.bash
@@ -41,8 +34,7 @@ jobs:
         run: |
           source /opt/ros/jazzy/setup.bash
           source install/setup.bash
-          # buildとinstallフォルダをチェック対象から外してテスト実行
-          colcon test --event-handlers console_direct+ --pytest-args "--flake8 --ignore=build --ignore=install"
+          colcon test --event-handlers console_direct+
 
       - name: Test result
         if: always()

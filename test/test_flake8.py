@@ -15,11 +15,10 @@
 from ament_flake8.main import main_with_errors
 import pytest
 
-
 @pytest.mark.flake8
 @pytest.mark.linter
 def test_flake8():
-    # source code folders only
+    # Only check source directories
     rc, errors = main_with_errors(argv=[
         'mypkg',
         'launch',

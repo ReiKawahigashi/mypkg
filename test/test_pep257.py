@@ -18,6 +18,7 @@ import pytest
 @pytest.mark.linter
 @pytest.mark.pep257
 def test_pep257():
+    # Only check source directories
     rc = main(argv=[
         'mypkg',
         'launch',
