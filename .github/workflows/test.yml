@@ -16,6 +16,11 @@ jobs:
         with:
           required-ros-distributions: humble
 
+      - name: Clean workspace
+        run: |
+          rm -rf build install log
+
+
       - name: Build
         run: |
           source /opt/ros/humble/setup.bash
