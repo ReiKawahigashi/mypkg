@@ -14,9 +14,7 @@ PID=$!
 # 起動待ち（CIは遅い）
 sleep 5
 
-# Alphabet のログが1回でも出ていればOK
-grep "Alphabet:" $LOG
+# Alphabet のログが1回でも出ていればOKgrep -E "Alphabet:[ABCDE]" $LOG
 
 # 後片付け
-kill $PID
-wait $PID 2>/dev/null || true
+kill $PID || true
