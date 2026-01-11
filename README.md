@@ -28,19 +28,19 @@ $ ros2 run mypkg double_calculator
 ```
 
 ### 3.コマンド実行例
-さらに別ターミナルを開き、/input_number トピックに整数値を送信する。
-以下は例として５を入力
+さらに別ターミナルを開き、input_number トピックに整数値を送信する。\
+以下は例として５を入力する。
 ```
 $ ros2 topic pub /input_number std_msgs/msg/Int32 "{data: 5}"
 ```
-double_calculator を起動しているターミナルには次のようなログが表示される。
+double_calculator を起動しているターミナルには次のようなログが表示される。\
 以下は例として入力した５の２倍した数が１０出あることを示している。
 ```
 [INFO] [double_calculator]: Received: 5, Published: 10
 ```
 
 ## 使用ソフトウェア
-・Python
+・Python\
 ・ROS2
 
 ## テスト環境
