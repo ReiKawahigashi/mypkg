@@ -4,7 +4,7 @@ jobs:
   test:
     runs-on: ubuntu-24.04
     container:
-      image: docker.io/reikawahigashi/ubuntu24.04-ros2:latest
+      image: ros:humble
       options: --user root
     steps:
       - uses: actions/checkout@v2
