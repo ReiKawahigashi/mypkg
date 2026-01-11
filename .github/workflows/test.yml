@@ -1,9 +1,9 @@
 name: test
 on: push
 jobs:
-　test:
-    runs-on: ubuntu-22.04
-    container: ReiKawahigashi/ubuntu22.04-ros2:latest
+  test:
+    runs-on: ubuntu-24.04
+    container: ReiKawahigashi/ubuntu24.04-ros2:latest
     steps:
       - uses: actions/checkout@v2
       - name: build and test
