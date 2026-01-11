@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='rei',
+    maintainer='Rei Kawahigashi',
     maintainer_email='s24C1042LK@s.chibakoudai.jp',
     description='a package for practice',
     license='BSD-3-Clause',
@@ -28,4 +28,4 @@ setup(
             'listener = mypkg.listener:main',
         ],
     },
-)#
+)
