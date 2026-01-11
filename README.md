@@ -34,7 +34,7 @@ $ ros2 run mypkg double_calculator
 $ ros2 topic pub /input_number std_msgs/msg/Int32 "{data: 5}"
 ```
 double_calculator を起動しているターミナルには次のようなログが表示される。\
-以下は例として入力した５の２倍した数が１０出あることを示している。
+以下は例として入力した５の２倍した数が１０であることを示している。
 ```
 [INFO] [double_calculator]: Received: 5, Published: 10
 ```
