@@ -1,6 +1,6 @@
 #!/bin/bash
-# lesson10.html 5ページ準拠
-# colcon test の結果を cat で確認する
+#SPDX-FileCopyrightText:2025 Rei Kawahigashi
+#SPDX-License-Identifier: BSD-3-Clause
 
 set -e
 
