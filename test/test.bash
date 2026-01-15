@@ -2,29 +2,17 @@
 #SPDX-FileCopyrightText:2025 Rei Kawahigashi
 #SPDX-License-Identifier: BSD-3-Clause
 
-set -e
+dir=~
+[ "$1" != "" ] && dir="$1"
 
-if [ $# -lt 1 ]; then
-    echo "usage: test.bash <workspace path>"
-    exit 1
-fi
+cd $dir/ros2_ws
+colcon build
+source $dir/.bashrc
+timeout 10 ros2 run mypkg double_calculator > /tmp/mypkg.log &
 
-WS=$1
-PKG=mypkg
+sleep 2
+ros2 topic pub -1 /input_number std_msgs/msg/Int32 "{data: 10}"
 
-echo "workspace: $WS"
+cat /tmp/mypkg.log |
+grep 'Published: 20'
 
-cd $WS
-
-source /opt/ros/humble/setup.bash
-
-echo "=== build ==="
-colcon build --packages-select $PKG
-
-source install/setup.bash
-
-echo "=== test ==="
-colcon test --packages-select $PKG
-
-echo "=== test result (cat) ==="
-cat build/$PKG/pytest.xml
