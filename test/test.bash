@@ -7,7 +7,8 @@ dir=~
 
 cd $dir/ros2_ws
 colcon build
-source $dir/.bashrc
+source /opt/ros/humble/setup.bash
+source install/setup.bash
 timeout 10 ros2 run mypkg double_calculator > /tmp/mypkg.log &
 
 sleep 2
